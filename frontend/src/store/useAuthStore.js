@@ -13,7 +13,6 @@ export const useAuthStore = create((set, get) => ({
     isUpdatingProfile: false,
     onlineUsers: [],
     socket: null,
-
     checkAuth: async () => {
         try {
             const res = await axiosInstance.get("/auth/check")
@@ -67,7 +66,7 @@ export const useAuthStore = create((set, get) => ({
     updateProfile: async (data) => {
         set({ isUpdatingProfile: true });
         try {
-             const res = await axiosInstance.put("/auth/update-profile", data);
+            const res = await axiosInstance.put("/auth/update-profile", data);
             set({ authUser: res.data });
             toast.success("profile update successfully");
 
@@ -88,15 +87,12 @@ export const useAuthStore = create((set, get) => ({
             },
         });
         socket.connect();
-
         socket.on("connect", () => {
             console.log("Connected to socket:", socket.id);
         });
-
         socket.on("getOnlineUsers", (users) => {
             set({ onlineUsers: users });
         });
-
         set({ socket });
     },
     disconnectSocket: () => {

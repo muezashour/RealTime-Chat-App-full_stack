@@ -86,7 +86,7 @@ export const logout = (req, res) => {
 };
 export const updateProfile = async (req, res) => {
   console.log("STEP 1: before upload");
-
+  
   try {
     const { profilePic } = req.body;
     const userId = req.user._id;
